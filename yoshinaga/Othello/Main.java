@@ -5,8 +5,6 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // Your code here!
-        
         // 定数
         final String BLACK_STONE = "●";
         final String WHITE_STONE = "◯";
@@ -37,69 +35,62 @@ public class Main {
         }
         
         
-        int turn = 0;
-        
         // この辺りからループさせる
-        turn++;
-        String stone = selectStone(turn);
+        for (int turn = 1; turn < 78; turn++) {
+            String stone = selectStone(turn);
+            System.out.println(stone);
         
-        
-        System.out.println(canPutStone(board, stone, 5, 3));
-        
-        if (true) {
-            return;
-        }
-        
-        // ここに全面反転チェックを入れる（反転できる数は一旦気にしない方向で）
-        List<Point> list = new ArrayList<Point>();
-        for (int y: new int[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9 }) {
-            for (int x: new int[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9 }) {
-                var canPut = canPutStone(board, stone, x, y);
-                if (canPut) {
-                    list.add(new Point(x, y));
+            // ここに全面反転チェックを入れる（反転できる数は一旦気にしない方向で）
+            List<Point> list = new ArrayList<Point>();
+            for (int y: new int[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9 }) {
+                for (int x: new int[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9 }) {
+                    var canPut = canPutStone(board, stone, x, y);
+                    if (canPut) {
+                        list.add(new Point(x, y));
+                    }
                 }
             }
-        }
-        System.out.println(list.size());
-        for (Point p: list) {
-            System.out.println("-----");
-            System.out.println(p.x);
-            System.out.println(p.y);
-        }
-        
-        // 置くところがなかったらスキップ
-        if (list.size() == 0) {
-            System.out.println();
-        }
-        
-        
-        Random rand = new Random();
-        int num = rand.nextInt(list.size());
-        
-        Point selected = list.get(num);
-        
-        // 行動宣言
-        int x = 4; //selected.x;
-        int y = 3; //selected.y;
-        System.out.println();
-        System.out.println(String.format("先行は %s, %s に石を置きました。", x, y));
-        
-        // 反転判定
-        var res = lower(board, BLACK_STONE, x, y);
-        if (res != null) {
-            putStone(board, BLACK_STONE, x, y);
             
-            var ddd = res.pop();
-            System.out.println();
-            System.out.println();
+            // 置くところがなかったらスキップ
+            if (list.size() == 0) {
+                System.out.println("置く場所が無かった為、ターンをスキップしました。");
+                continue;
+            }
             
-            putStone(board, BLACK_STONE, ddd.x, ddd.y);
-        }
-        
-        System.out.println("");
-        
-        for (String[] row : board) {
-            System.out.println(Arrays.asList(row));
+            
+            Random rand = new Random();
+            int num = rand.nextInt(list.size());
+            
+            Point selected = list.get(num);
+            
+            // 行動宣言
+            int x = selected.x;
+            int y = selected.y;
+            
+            // 反転判定
+            var points = getReversePoints(board, stone, x, y);
+            putStone(board, stone, x, y);
+            if (points != null) {
+                // 正常動作
+                for (Point point: points) {
+                    putStone(board, stone, point.x, point.y);
+                }   
+            } else {
+                // なんか想定外の動作があったのでチェック用
+                System.out.println("------");
+                System.out.println(x);
+                System.out.println(y);
+                System.out.println(stone);
+                return;
+            }
+            
+            System.out.println();
+            System.out.println(String.format("先行は %s, %s に石を置きました。", x, y));
+            System.out.println("");
+            
+            for (String[] row : board) {
+                System.out.println(Arrays.asList(row));
+            }
         }
         
         
@@ -119,7 +110,7 @@ public class Main {
     public static boolean canPutStone(String[][] board, String stone, int x, int y) {
         if (board[y][x] != " ") {
             return false;
-        } // 既においてあったらreturn
+        }
         
         var upper = upper(board, stone, x, y);
         var lower = lower(board, stone, x, y);
@@ -132,16 +123,42 @@ public class Main {
         
         // 下手にStack を使ってしまったばかりにこんなことに・・・
         // NUll許容型使えればもっと綺麗になる
-        
-        System.out.println(!(upper == null || upper.empty()));
-        System.out.println(!(lower == null || lower.empty()));
-        System.out.println(!(left == null || left.empty()));
-        System.out.println(!(right == null || right.empty()));
-        System.out.println(!(upperRight == null || upperRight.empty()));
-        System.out.println(!(upperLeft == null || upperLeft.empty()));
-        System.out.println(!(lowerLeft == null || lowerLeft.empty()));
-        System.out.println(!(lowerRight == null || lowerRight.empty()));
         return !(upper == null || upper.empty()) || !(lower == null || lower.empty()) || !(right == null || right.empty()) || !(left == null || left.empty()) || !(upperRight == null || upperRight.empty()) || !(upperLeft == null || upperLeft.empty()) || !(lowerRight == null || lowerRight.empty()) || !(lowerLeft == null || lowerLeft.empty());
+    }
+    
+    public static List<Point> getReversePoints(String[][] board, String stone, int x, int y) {
+        // おいて良い場所かどうかは一旦チェックなし。
+        List<Point> list = new ArrayList<Point>(); //　このやり方は本当にひどいので後で修正する
+        
+        var upper = upper(board, stone, x, y);
+        mergeStackToList(list, upper);
+        var lower = lower(board, stone, x, y);
+        mergeStackToList(list, lower);
+        var right = right(board, stone, x, y);
+        mergeStackToList(list, right);
+        var left = left(board, stone, x, y);
+        mergeStackToList(list, left);
+        var upperLeft = upperLeft(board, stone, x, y);
+        mergeStackToList(list, upperLeft);
+        var upperRight = upperRight(board, stone, x, y);
+        mergeStackToList(list, upperRight);
+        var lowerLeft = lowerLeft(board, stone, x, y);
+        mergeStackToList(list, lowerLeft);
+        var lowerRight = lowerRight(board, stone, x, y);
+        mergeStackToList(list, lowerRight);
+        
+        return list;
+    }
+    
+    public static List<Point> mergeStackToList(List<Point> list, Stack<Point> stack) {
+        if (stack == null) {
+            return null;
+        }
+        // List<Point> list = new ArrayList<Point>();
+        while (!stack.empty()) {
+            list.add(stack.pop());
+        }
+        return list;
     }
     
     // 同じ色：反転
@@ -157,7 +174,7 @@ public class Main {
             Stack<Point> stack = new Stack();
             return stack;
         } else {
-            var stack = lower(board, stone, x, y);
+            var stack = upper(board, stone, x, y);
             if (stack == null) {
                 return null;
             } else {
@@ -170,19 +187,12 @@ public class Main {
     public static Stack<Point> lower(String[][] board, String stone, int x, int y) {
         y += 1; // 面倒だったので再代入
         
-        // System.out.println(x);
-        // System.out.println(y);
-        // System.out.println(board[y][x]);
-        
         if (y < 1 || y > 9 || x < 1 || x > 9 || board[y][x] == " ") {
-        System.out.println("??");
             return null;
         } else if (board[y][x] == stone) {
-        System.out.println("OK");
             Stack<Point> stack = new Stack();
             return stack;
         } else {
-        System.out.println("NG");
             var stack = lower(board, stone, x, y);
             if (stack == null) {
                 return null;
@@ -202,7 +212,7 @@ public class Main {
             Stack<Point> stack = new Stack();
             return stack;
         } else {
-            var stack = lower(board, stone, x, y);
+            var stack = right(board, stone, x, y);
             if (stack == null) {
                 return null;
             } else {
@@ -221,7 +231,7 @@ public class Main {
             Stack<Point> stack = new Stack();
             return stack;
         } else {
-            var stack = lower(board, stone, x, y);
+            var stack = left(board, stone, x, y);
             if (stack == null) {
                 return null;
             } else {
@@ -241,7 +251,7 @@ public class Main {
             Stack<Point> stack = new Stack();
             return stack;
         } else {
-            var stack = lower(board, stone, x, y);
+            var stack = upperLeft(board, stone, x, y);
             if (stack == null) {
                 return null;
             } else {
@@ -261,7 +271,7 @@ public class Main {
             Stack<Point> stack = new Stack();
             return stack;
         } else {
-            var stack = lower(board, stone, x, y);
+            var stack = upperRight(board, stone, x, y);
             if (stack == null) {
                 return null;
             } else {
@@ -275,18 +285,13 @@ public class Main {
         x -= 1; // 面倒だったので再代入
         y += 1; // 面倒だったので再代入
         
-        
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(board[y][x]);
-        
         if (y < 1 || y > 9 || x < 1 || x > 9 || board[y][x] == " ") {
             return null;
         } else if (board[y][x] == stone) {
             Stack<Point> stack = new Stack();
             return stack;
         } else {
-            var stack = lower(board, stone, x, y);
+            var stack = lowerLeft(board, stone, x, y);
             if (stack == null) {
                 return null;
             } else {
@@ -300,17 +305,13 @@ public class Main {
         x += 1; // 面倒だったので再代入
         y += 1; // 面倒だったので再代入
         
-        // System.out.println(x);
-        // System.out.println(y);
-        // System.out.println(board[y][x]);
-        
         if (y < 1 || y > 9 || x < 1 || x > 9 || board[y][x] == " ") {
             return null;
         } else if (board[y][x] == stone) {
             Stack<Point> stack = new Stack();
             return stack;
         } else {
-            var stack = lower(board, stone, x, y);
+            var stack = lowerRight(board, stone, x, y);
             if (stack == null) {
                 return null;
             } else {
@@ -330,3 +331,6 @@ class Point {
         this.y = y;
     }
 }
+
+// 勝ち負けの判定入れるの忘れてた
+// スキップしたときに石の色おかしくなるってことに気づいたので要修正
