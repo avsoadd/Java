@@ -1,0 +1,19 @@
+/*
+-------------------------------------------------------------------------------
+Pleiades Gradle Project Creation Wizard Init Script
+-------------------------------------------------------------------------------
+gradle
+wrapper
+--init-script
+../.metadata/init.gradle
+-------------------------------------------------------------------------------
+*/
+allprojects {
+	ant.copy(todir: '') {
+		fileset (
+			dir: '../.metadata/init.gradle_template',
+			defaultexcludes: 'no',
+			excludes: '**/thumbs.db, **/desktop.ini, **/.DS_Store', 
+		)
+	}
+}
