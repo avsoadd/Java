@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Shooting {
 	public static ShootingFrame shootingFrame;
@@ -24,6 +25,10 @@ public class Shooting {
 		int FPSCount = 0;
 		Graphics gra = shootingFrame.panel.image.getGraphics();
 		
+		//GAME
+		int playerX = 0, playerY = 0;
+		ArrayList<Bullet> bullets = new ArrayList<>();
+		ArrayList<Enemy> enemies = new ArrayList<>();
 		
 		
 		EnumShootingScrean screan = EnumShootingScrean.START;
@@ -55,10 +60,19 @@ public class Shooting {
 				gra.drawString("Sress SPACR to Start", 250 - (metrics.stringWidth("Sress SPACR to Start") / 2), 150);
 				if(Keyboard.isKeyPressed(KeyEvent.VK_SPACE)) {
 					screan = EnumShootingScrean.GAME;
+
+					bullets = new ArrayList<>();
+					enemies = new ArrayList<>();
+					playerX = 235;
+					playerY = 400;
+					
 				}
 				
 				break;
 			case GAME:
+				gra.setColor(Color.BLUE);
+				gra.fillRect(playerX + 10, playerY, 10, 10);
+				gra.fillRect(playerX, playerY + 10, 30, 10);
 				break;
 			case GAME_OVER:
 				break;

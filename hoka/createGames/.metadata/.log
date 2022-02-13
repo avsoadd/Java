@@ -1959,3 +1959,39 @@ java.lang.InterruptedException
 	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
 	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
 	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:07.927
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:07.929
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:08.108
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:08.110
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:08.113
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:08.115
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:08.118
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:08.119
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:08.126
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:08.129
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:08.246
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
+
+!ENTRY mergedoc.encoding 2 0 2022-02-13 17:40:08.248
+!MESSAGE リソース '/shootingGame/src/mainPackage/bullet.java' が存在しません。
