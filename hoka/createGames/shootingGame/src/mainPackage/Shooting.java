@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 public class Shooting {
 	public static ShootingFrame shootingFrame;
@@ -52,6 +53,10 @@ public class Shooting {
 				gra.setFont(font);
 				metrics = gra.getFontMetrics(font);
 				gra.drawString("Sress SPACR to Start", 250 - (metrics.stringWidth("Sress SPACR to Start") / 2), 150);
+				if(Keyboard.isKeyPressed(KeyEvent.VK_SPACE)) {
+					screan = EnumShootingScrean.GAME;
+				}
+				
 				break;
 			case GAME:
 				break;
