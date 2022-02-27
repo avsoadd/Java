@@ -73,6 +73,23 @@ public class Shooting {
 				gra.setColor(Color.BLUE);
 				gra.fillRect(playerX + 10, playerY, 10, 10);
 				gra.fillRect(playerX, playerY + 10, 30, 10);
+				
+				for(Bullet bullet:bullets) {
+					gra.setColor(Color.BLUE);
+					gra.fillRect(bullet.x, bullet.y, 5, 5);
+					bullet.y -=10;
+				}
+				
+				
+				if(Keyboard.isKeyPressed(KeyEvent.VK_LEFT) && playerX>0) playerX-=3;
+				if(Keyboard.isKeyPressed(KeyEvent.VK_RIGHT) && playerX<455) playerX+=3;
+				if(Keyboard.isKeyPressed(KeyEvent.VK_UP) && playerY>50) playerY-=3;
+				if(Keyboard.isKeyPressed(KeyEvent.VK_DOWN) && playerY<430) playerY+=3;
+				
+				
+				if(Keyboard.isKeyPressed(KeyEvent.VK_A)) {
+					bullets.add(new Bullet(playerX + 12, playerY));
+				}
 				break;
 			case GAME_OVER:
 				break;
