@@ -6,6 +6,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Shooting {
 	public static ShootingFrame shootingFrame;
@@ -27,8 +28,11 @@ public class Shooting {
 		
 		//GAME
 		int playerX = 0, playerY = 0;
-		ArrayList<Bullet> bullets = new ArrayList<>();
+		int bulletInterval = 0;
+		ArrayList<Bullet> bullets_player = new ArrayList<>();
+		ArrayList<Bullet> bullets_enemy = new ArrayList<>();
 		ArrayList<Enemy> enemies = new ArrayList<>();
+		Random random = new Random();
 		
 		
 		EnumShootingScrean screan = EnumShootingScrean.START;
@@ -61,7 +65,7 @@ public class Shooting {
 				if(Keyboard.isKeyPressed(KeyEvent.VK_SPACE)) {
 					screan = EnumShootingScrean.GAME;
 
-					bullets = new ArrayList<>();
+					bullets_player = new ArrayList<>();
 					enemies = new ArrayList<>();
 					playerX = 235;
 					playerY = 400;
@@ -74,18 +78,43 @@ public class Shooting {
 				gra.fillRect(playerX + 10, playerY, 10, 10);
 				gra.fillRect(playerX, playerY + 10, 30, 10);
 				
-				for(int i = 0; i < bullets.size();i++) {
-					Bullet bullet = bullets.get(i);
+				for(int i = 0; i < bullets_player.size();i++) {
+					Bullet bullet = bullets_player.get(i);
 					gra.setColor(Color.BLUE);
 					gra.fillRect(bullet.x, bullet.y, 5, 5);
 					bullet.y -=10;
 					
 					if(bullet.y<0) {
-						bullets.remove(i);
+						bullets_player.remove(i);
 						i--;
 					}
 				}
 				
+				
+				gra.setColor(Color.RED);
+				for(int i = 0; i < bullets_enemy.size();i++) {
+					Bullet bullet = bullets_enemy.get(i);
+					gra.setColor(Color.RED);
+					gra.fillRect(bullet.x, bullet.y, 5, 5);
+					bullet.y +=10;
+					
+					if(bullet.y>500) {
+						bullets_enemy.remove(i);
+						i--;
+					}
+				}
+				
+				
+				for (int i = 0; i < enemies.size(); i++) {
+					Enemy enemy = enemies.get(i);
+					gra.fillRect(enemy.x, enemy.y, 30, 10);
+					gra.fillRect(enemy.x + 10, enemy.y + 10, 10, 10);
+					
+					enemy.y += 5;
+					if(enemy.y > 500) enemies.remove(i);
+					if(random.nextInt(50)== 1) bullets_enemy.add(new Bullet(enemy.x, enemy.y));
+				}
+				if(random.nextInt(50)== 1) enemies.add(new Enemy(random.nextInt(450), 0));
 				
 				if(Keyboard.isKeyPressed(KeyEvent.VK_LEFT) && playerX>0) playerX-=3;
 				if(Keyboard.isKeyPressed(KeyEvent.VK_RIGHT) && playerX<455) playerX+=3;
@@ -93,9 +122,12 @@ public class Shooting {
 				if(Keyboard.isKeyPressed(KeyEvent.VK_DOWN) && playerY<430) playerY+=3;
 				
 				
-				if(Keyboard.isKeyPressed(KeyEvent.VK_A)) {
-					bullets.add(new Bullet(playerX + 12, playerY));
+				if(Keyboard.isKeyPressed(KeyEvent.VK_A)&&bulletInterval==0) {
+					bullets_player.add(new Bullet(playerX + 12, playerY));
+					bulletInterval = 8;
 				}
+				
+				if(bulletInterval>0) bulletInterval--;
 				break;
 			case GAME_OVER:
 				break;
