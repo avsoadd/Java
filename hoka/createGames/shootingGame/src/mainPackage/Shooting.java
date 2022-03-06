@@ -36,7 +36,7 @@ public class Shooting {
 		Random random = new Random();
 		
 		
-		EnumShootingScrean screan = EnumShootingScrean.START;
+		EnumShootingScreen screen = EnumShootingScreen.START;
 		
 		
 		
@@ -52,7 +52,7 @@ public class Shooting {
 			gra.setColor(Color.WHITE);
 			gra.fillRect(0, 0, 500, 500); 
 			
-			switch(screan) {
+			switch(screen) {
 			case START:
 				gra.setColor(Color.BLACK);
 				Font font = new Font("SansSerif", Font.PLAIN, 50);
@@ -64,8 +64,8 @@ public class Shooting {
 				metrics = gra.getFontMetrics(font);
 				gra.drawString("Sress SPACR to Start", 250 - (metrics.stringWidth("Sress SPACR to Start") / 2), 150);
 				if(Keyboard.isKeyPressed(KeyEvent.VK_SPACE)) {
-					screan = EnumShootingScrean.GAME;
-
+					screen = EnumShootingScreen.GAME;
+					
 					bullets_player = new ArrayList<>();
 					enemies = new ArrayList<>();
 					playerX = 235;
@@ -109,9 +109,10 @@ public class Shooting {
 					gra.fillRect(bullet.x, bullet.y, 5, 5);
 					bullet.y +=10;
 					
-					if(bullet.y>500) {
-						bullets_enemy.remove(i);
-						i--;
+					if(bullet.y>500) {bullets_enemy.remove(i); i--;}
+					if(bullet.x >= playerX && bullet.x <= playerX + 30 &&
+						bullet.y >= playerY && bullet.y <= playerY + 20) {
+						screen = EnumShootingScreen.GAME_OVER;
 					}
 				}
 				

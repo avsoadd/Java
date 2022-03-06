@@ -1,6 +1,6 @@
 package mainPackage;
 
-public enum EnumShootingScrean {
+public enum EnumShootingScreen {
 	START,
 	GAME,
 	GAME_OVER,
