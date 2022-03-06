@@ -103,6 +103,23 @@ public class Shooting {
 				
 				
 				gra.setColor(Color.RED);
+				
+				
+				
+				for (int i = 0; i < enemies.size(); i++) {
+					Enemy enemy = enemies.get(i);
+					gra.fillRect(enemy.x, enemy.y, 30, 10);
+					gra.fillRect(enemy.x + 10, enemy.y + 10, 10, 10);
+					
+					enemy.y += 3;
+					if(enemy.y > 500) enemies.remove(i);
+					if(random.nextInt(80)== 1) bullets_enemy.add(new Bullet(enemy.x, enemy.y));
+					if(enemy.x >= playerX && enemy.x <= playerX + 30 &&
+							enemy.y >= playerY && enemy.y <= playerY + 20) {
+							screen = EnumShootingScreen.GAME_OVER;
+						}
+					}
+				
 				for(int i = 0; i < bullets_enemy.size();i++) {
 					Bullet bullet = bullets_enemy.get(i);
 					gra.setColor(Color.RED);
@@ -116,16 +133,6 @@ public class Shooting {
 					}
 				}
 				
-				
-				for (int i = 0; i < enemies.size(); i++) {
-					Enemy enemy = enemies.get(i);
-					gra.fillRect(enemy.x, enemy.y, 30, 10);
-					gra.fillRect(enemy.x + 10, enemy.y + 10, 10, 10);
-					
-					enemy.y += 3;
-					if(enemy.y > 500) enemies.remove(i);
-					if(random.nextInt(80)== 1) bullets_enemy.add(new Bullet(enemy.x, enemy.y));
-				}
 				if(random.nextInt(30)== 1) enemies.add(new Enemy(random.nextInt(450), 0));
 				
 				if(Keyboard.isKeyPressed(KeyEvent.VK_LEFT) && playerX>0) playerX-=5;
