@@ -153,6 +153,11 @@ public class Shooting {
 				gra.drawString("SCORE:" + score, 10, 30);
 				break;
 			case GAME_OVER:
+				gra.setColor(Color.BLACK);
+				font = new Font("SansSerif", Font.PLAIN, 50);
+				gra.setFont(font);
+				metrics = gra.getFontMetrics(font);
+				gra.drawString("Game Over", 250 - (metrics.stringWidth("Game Over") / 2), 100);				
 				break;
 			}
 			
