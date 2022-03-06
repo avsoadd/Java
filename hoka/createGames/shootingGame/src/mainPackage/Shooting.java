@@ -29,6 +29,7 @@ public class Shooting {
 		//GAME
 		int playerX = 0, playerY = 0;
 		int bulletInterval = 0;
+		int score = 0;
 		ArrayList<Bullet> bullets_player = new ArrayList<>();
 		ArrayList<Bullet> bullets_enemy = new ArrayList<>();
 		ArrayList<Enemy> enemies = new ArrayList<>();
@@ -88,6 +89,15 @@ public class Shooting {
 						bullets_player.remove(i);
 						i--;
 					}
+					
+					for (int l = 0; l < enemies.size(); l++) {
+						Enemy enemy = enemies.get(l);
+						if(bullet.x >= enemy.x && bullet.x <= enemy.x + 30 &&
+								bullet.y >= enemy.y && bullet.y < enemy.y + 20) {
+							enemies.remove(l);
+						}
+					}
+					
 				}
 				
 				
@@ -110,16 +120,16 @@ public class Shooting {
 					gra.fillRect(enemy.x, enemy.y, 30, 10);
 					gra.fillRect(enemy.x + 10, enemy.y + 10, 10, 10);
 					
-					enemy.y += 5;
+					enemy.y += 3;
 					if(enemy.y > 500) enemies.remove(i);
-					if(random.nextInt(50)== 1) bullets_enemy.add(new Bullet(enemy.x, enemy.y));
+					if(random.nextInt(80)== 1) bullets_enemy.add(new Bullet(enemy.x, enemy.y));
 				}
-				if(random.nextInt(50)== 1) enemies.add(new Enemy(random.nextInt(450), 0));
+				if(random.nextInt(30)== 1) enemies.add(new Enemy(random.nextInt(450), 0));
 				
-				if(Keyboard.isKeyPressed(KeyEvent.VK_LEFT) && playerX>0) playerX-=3;
-				if(Keyboard.isKeyPressed(KeyEvent.VK_RIGHT) && playerX<455) playerX+=3;
-				if(Keyboard.isKeyPressed(KeyEvent.VK_UP) && playerY>50) playerY-=3;
-				if(Keyboard.isKeyPressed(KeyEvent.VK_DOWN) && playerY<430) playerY+=3;
+				if(Keyboard.isKeyPressed(KeyEvent.VK_LEFT) && playerX>0) playerX-=5;
+				if(Keyboard.isKeyPressed(KeyEvent.VK_RIGHT) && playerX<455) playerX+=5;
+				if(Keyboard.isKeyPressed(KeyEvent.VK_UP) && playerY>50) playerY-=5;
+				if(Keyboard.isKeyPressed(KeyEvent.VK_DOWN) && playerY<430) playerY+=5;
 				
 				
 				if(Keyboard.isKeyPressed(KeyEvent.VK_A)&&bulletInterval==0) {
