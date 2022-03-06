@@ -67,10 +67,11 @@ public class Shooting {
 					screen = EnumShootingScreen.GAME;
 					
 					bullets_player = new ArrayList<>();
+					bullets_enemy = new ArrayList<>();
 					enemies = new ArrayList<>();
 					playerX = 235;
 					playerY = 400;
-					
+					score = 0;
 				}
 				
 				break;
@@ -160,6 +161,17 @@ public class Shooting {
 				gra.setFont(font);
 				metrics = gra.getFontMetrics(font);
 				gra.drawString("Game Over", 250 - (metrics.stringWidth("Game Over") / 2), 100);				
+				
+				font = new Font("SansSerif", Font.PLAIN, 20);
+				gra.setFont(font);
+				metrics = gra.getFontMetrics(font);
+				gra.drawString("Score: " + score, 250 - (metrics.stringWidth("Score: " + score) / 2), 150);				
+				gra.drawString("Press ESC to Return Start Screen", 250 - (metrics.stringWidth("Press ESC to Return Start Screen") / 2), 200);				
+				
+				if (Keyboard.isKeyPressed(KeyEvent.VK_ESCAPE)) {
+					screen = EnumShootingScreen.START;
+				}
+				
 				break;
 			}
 			
