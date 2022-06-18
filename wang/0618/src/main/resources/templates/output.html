@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>答え</title>
+<link rel="stylesheet" href=".style.css">
+<style>
+        body{text-align: center;}
+    </style>
+</head>
+<body>
+<form method="get" action="input">
+   <p>あなたの質問は：</p>
+   <p th:text="${inputQuestion}"></p>
+   <p>回答:</p>
+   <p th:text="${answer}"></p>
+   <input type="submit" value="戻る">
+</form>
+</body>
+</html>
