@@ -1,4 +1,4 @@
-package com.sus.database;
+package com.mailservice;
 
 import javax.servlet.http.HttpServletResponse;
 
