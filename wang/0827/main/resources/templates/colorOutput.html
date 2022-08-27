@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Your color is ...</title>
+<style>
+.square_box {
+  width: 30vw;
+  height: 30vw;
+
+}</style>
+
+</head>
+<body>
+<form method="get" action="colorInput">
+   <p>あなたの色は：</p>
+   <div class="square_box" th:style="'background-color:rgb('+ ${colorCode} +')'"></div>
+   <p th:text="${colorCode}" th:style="'color:rgb('+ ${colorCode} +')'"></p>
+
+
+
+   <input type="submit" value="戻る">
+</form>
+</body>
+</html>

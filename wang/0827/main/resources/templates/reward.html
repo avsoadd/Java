@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>抽選画面</title>
+</head>
+<body>
+<p>抽選</p>
+<form action="gameView" method="post">
+<p th:text="${inputName}"></p><p>さん、ようこそ</p>
+<p>抽選券の枚数：</p><p th:text="${ticket}"></p>
+<div ><button type="submit">もどる</button></div>
+</form>
+
+</body>
+</html>
