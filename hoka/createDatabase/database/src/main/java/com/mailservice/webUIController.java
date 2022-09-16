@@ -13,4 +13,14 @@ public class webUIController {
 	public String index(HttpServletResponse response) throws Exception {
 		return "home";
 		}
+	
+	@RequestMapping(path = "/form", method = RequestMethod.GET)
+	public String form(HttpServletResponse response) throws Exception {
+		return "form";
+		}
+	
+	@RequestMapping(path = "/mypage", method = RequestMethod.GET)
+	public String mypage(HttpServletResponse response) throws Exception {
+		return "mypage";
+		}
 }

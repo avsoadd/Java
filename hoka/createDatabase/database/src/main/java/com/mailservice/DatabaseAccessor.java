@@ -21,10 +21,10 @@ public class DatabaseAccessor implements UserInfoRepository {
 	}
 
 	@Override
-	public String getUser() {
+	public Map<String, Object> getUser() {
 		// TODO 自動生成されたメソッド・スタブ
 		Map<String, Object> map = jdbcTemplate.queryForMap("SELECT * FROM database.test_table");
-		private String user = map("id");
-		return ;
+		// private String user = map.get("id");
+		return map;
 	}
 }
