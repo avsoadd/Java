@@ -3,15 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!--<script>
+	function buttonClick(){
+		let user2 = document.querySelectorAll(`#username2`).value
+	   /* if (username.lenth <= 0) {
+	        alert("氏名は必須入力です。(js)");
+            preventDefault()
+            stopPropagetion()
+	    }*/
+	    alert(user2)
+	}
+</script>-->
+<script type="text/javascript" th:src="@{/demo.js}"></script>
 </head>
 <body>
 	<h1>aaaaa</h1>
-	<form th:action="@{/}" th:object="${user}" method="post">
-		氏名: <input type="text" th:field="*{name}" /><br />
-		<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-		年齢: <input  type="number" th:field="*{age}"/><br />
-		<div th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
-		<button>送信</button>
+	<form th:action="@{/}" th:object="${user}" method="">
+		氏名: <input type="text" id="username" th:field="*{name}"  value=""/><br />
+		氏名2: <input type="text" id="username2" value=""/><br />
+		<span id="errname" style="color:red;display:none">氏名は必須入力です</span><br />
+		年齢: <input  type="number" id="userage" th:field="*{age}" value=""/><br />
+		<button id="btn" onclick="buttonClick()">送信</button>
 	</form>
 </body>
 </html>
