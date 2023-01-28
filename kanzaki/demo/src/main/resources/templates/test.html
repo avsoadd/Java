@@ -3,27 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!--<script>
-	function buttonClick(){
-		let user2 = document.querySelectorAll(`#username2`).value
-	   /* if (username.lenth <= 0) {
-	        alert("氏名は必須入力です。(js)");
-            preventDefault()
-            stopPropagetion()
-	    }*/
-	    alert(user2)
-	}
-</script>-->
 <script type="text/javascript" th:src="@{/demo.js}"></script>
 </head>
 <body>
 	<h1>aaaaa</h1>
-	<form th:action="@{/}" th:object="${user}" method="">
-		氏名: <input type="text" id="username" th:field="*{name}"  value=""/><br />
-		氏名2: <input type="text" id="username2" value=""/><br />
-		<span id="errname" style="color:red;display:none">氏名は必須入力です</span><br />
-		年齢: <input  type="number" id="userage" th:field="*{age}" value=""/><br />
-		<button id="btn" onclick="buttonClick()">送信</button>
+	<form th:action="@{/confirm}" th:object="${user}" method="post">
+		氏名: <input type="text" id="username" th:field="*{name}" value="" /><br /> <span
+			id="errname" style="color: red; display: none">氏名は必須入力です</span><br />
+		年齢: <input type="number" id="userage" th:field="*{age}" value="" /><br />
+
+		<div>
+			<h1>じゃんけんゲーム</h1>
+
+			<label>出す手を決めてください</label> 
+			<select th:field="*{userhand}">
+				<option value="1">グー</option>
+				<option value="2">チョキ</option>
+				<option value="3">パー</option>
+			</select>
+		</div>
+		<br />
+		<br />
+		<button type="button" id="btn" onclick="buttonClick()">送信</button>
 	</form>
+
+
+
 </body>
 </html>

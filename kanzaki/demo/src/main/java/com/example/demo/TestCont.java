@@ -11,7 +11,7 @@ public class TestCont {
 	public String test (@ModelAttribute User user) {
 		return "test";
 	}
-	@PostMapping (path = "/")
+	@PostMapping (path = "/confirm")
 	public String confirm (@ModelAttribute User user) {
 		return "confirm";
 	}
