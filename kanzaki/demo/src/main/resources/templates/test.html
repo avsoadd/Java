@@ -6,7 +6,7 @@
 <script type="text/javascript" th:src="@{/demo.js}"></script>
 </head>
 <body>
-	<h1>aaaaa</h1>
+	<h1>User</h1>
 	<form th:action="@{/confirm}" th:object="${user}" method="post">
 		氏名: <input type="text" id="username" th:field="*{name}" value="" /><br /> <span
 			id="errname" style="color: red; display: none">氏名は必須入力です</span><br />
@@ -16,7 +16,7 @@
 			<h1>じゃんけんゲーム</h1>
 
 			<label>出す手を決めてください</label> 
-			<select th:field="*{userhand}">
+			<select th:field="*{userHand}">
 				<option value="1">グー</option>
 				<option value="2">チョキ</option>
 				<option value="3">パー</option>
