@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>確認画面</h1>
-  <span th:inline="text">
-    氏名： [[${user.name}]]<br>
-    年齢： [[${user.age}]]<br>
-    
-    user： [[${user.getUserhandString()}]]<br>
-    npc： [[${user.getNpchandString()}]]<br><br>
-    結果： [[${user.result(user.userHand, user.npcHand)}]]
-  </span>
+	<h1>確認画面</h1>
+	<span th:inline="text"> 
+	    user： [[${user.getUserhandString()}]]<br><br>
+		npc1： [[${user.getNpc1handString()}]]<br><br> 
+		npc2：[[${user.getNpc2handString()}]]<br><br> 
+		結果：[[${user.result(user.userHand, user.npc1Hand,user.npc2Hand)}]]
+	</span>
+	<br>
+	<br>
+	<br>
+
+	<button onclick="location.href='/'">再挑戦</button>
 </body>
 </html>
