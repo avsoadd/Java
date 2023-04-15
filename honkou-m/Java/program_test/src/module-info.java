@@ -1,0 +1,2 @@
+module program_test {
+}
