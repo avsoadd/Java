@@ -1,5 +1,7 @@
+import java.util.Random;
 public class Npc {
 	public int play() {
-		return 1;
+		Random r = new Random();
+		return r.nextInt(9) + 1;
 	}
 }
