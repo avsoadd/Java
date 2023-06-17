@@ -23,7 +23,7 @@ public class Customer {
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
-    @Query("SELECT * FROM customers WHERE email = :email")
-    Customer findByEmail(String email);
+public interface PostgresRepository extends CrudRepository<Customer, Long> {
+    //@Query("SELECT * FROM customers WHERE email = :email")
+    //Customer findByEmail(String email);
 }
