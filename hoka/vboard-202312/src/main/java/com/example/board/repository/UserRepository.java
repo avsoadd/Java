@@ -12,4 +12,8 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
 
     // ここにクエリメソッドやカスタムメソッドを定義することができます
     List<Users> findByUserName(String userName);
+    
+    List<Users> findById(int userId);
+    
+    
 }

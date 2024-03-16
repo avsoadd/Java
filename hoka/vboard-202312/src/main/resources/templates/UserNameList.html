@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thymeleaf Sample</title>
+</head>
+<body>
+
+  <div class="container">
+    <h1>ユーザー情報一覧</h1>
+    <form th:action="@{/listUpdate}" th:object="${userListParam}" th:method="post">
+      <div  class="text-end">
+        <input type="submit" class="btn btn-primary" value="　更新　">
+      </div><br />
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>UserID</th>
+            <th>名前</th>
+            <th>メールアドレス</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="user, st : *{userDataList}" class="align-middle">
+            <td>
+              <label th:text="${user.id}"></label>
+              <input type="hidden" th:field="*{userDataList[__${st.index}__].id}">
+            </td>
+            <td>
+              <input type="text" class="form-control" th:field="*{userDataList[__${st.index}__].name}">
+            </td>
+            <td>
+              <input type="text" class="form-control" th:field="*{userDataList[__${st.index}__].address}">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</body>
+</html>
