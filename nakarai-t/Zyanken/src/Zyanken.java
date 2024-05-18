@@ -19,7 +19,7 @@ public class Zyanken {
 		int winnercount = 0;
 		int battleresult, pcvalue, playervalue;
 		
-		while(winnercount <= victorycount) {
+		while(winnercount < victorycount) {
 			//プレイヤーの手を受け取る
 			playervalue = getplayervalue();
 			//pcの手を受け取る
@@ -27,7 +27,7 @@ public class Zyanken {
 			//勝敗を判定する
 			battleresult = getbattleresult(playervalue, pcvalue);
 			//勝敗結果を表示する
-			winnercount =getwincount(battleresult);
+			winnercount = winnercount + getwincount(battleresult);
 			
 		}
 		
