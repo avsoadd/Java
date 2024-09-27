@@ -6,9 +6,19 @@ Spring Web サービスの勉強プロジェクトです。
 ## 作業環境
 
 - Windows11
-- Eclipse
+- Eclipse (Full Edition)
   - Version: 2023-12 (4.30.0)
   - Build id: 20231201-2043
+  - JDK・・・ Adoptium 8u402、11.0.21、17.0.10、21.0.2
+
+
+### スターター・プロジェクト依存関係
+
+- Spring Boot DevTools
+- Spring Web
+- Thymeleaf
+- 検証(Validation)
+- Lombok
 
 
 
@@ -85,6 +95,20 @@ java {
 
 2. [ここ](https://docs.gradle.org/current/userguide/compatibility.html) でJavaとGradleの対応バージョンを確認する
 3. 「gradle-wrapper.properties」の `distributionUrl` の値を適切なバージョンへ変更する
+
+
+## ◎勉強メモ
+
+#### 一部 namespace が javax ではなく jakarta である件
+
+- 大人しくjakartaを使う
+- 調べたら色々記事がある
+  - [ここ](https://gihyo.jp/article/2022/07/java2022-0701) などは分かりやすい
+
+
+
+
+
 
 
 
