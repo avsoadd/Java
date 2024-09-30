@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 今回のサンプルで使用しているCSS（bootstrap）の読み込み -->
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+			integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+			crossorigin="anonymous">
+		<title>output</title>
+	</head>
+	<body>
+		<div class="login align-items-center py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9 col-lg-8 mx-auto">
+						<h3 class="login-heading my-4">メッセージ</h3>
+						<!-- リストがある場合の処理 -->
+						<div th:if="${messages}">
+							<!-- 処理結果のメッセージ（インライン） -->
+							<p>[[${result}]]</p>
+							<!-- 入力されたメッセージ -->
+							<ul class="list-group list-group-flush" th:each="message : ${messages}">
+								<li th:text="${message}"></li>
+							</ul>
+						</div>
+						<!-- リストが無い場合の処理 -->
+						<div th:unless="${messages}">
+							<p>endが入力されたため処理を終了します</p>
+						</div>
+					</div>
+				</div>
+				<a class="btn btn-block" href="/">戻る</a>
+			</div>
+		</div>
+	</body>
+</html>

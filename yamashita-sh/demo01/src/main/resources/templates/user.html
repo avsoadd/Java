@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 今回のサンプルで使用しているCSS（bootstrap）の読み込み -->
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+			integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+			crossorigin="anonymous">
+		<title>user</title>
+	</head>
+	<body>
+		<div class="login align-items-center py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9 col-lg-8 mx-auto">
+						<h3 class="login-heading my-4">ユーザ情報入力</h3>
+						<p th:text="${message}"></p>
+						<form action="input_userform" method="post" th:object="${userForm}">
+							<!-- 氏名 -->
+							<div class="form-label-group">
+								<label for="name">名前</label>
+								<input type="text"
+									id="name"
+									name="name"
+									th:value="*{name}"
+									class="form-control">
+							</div>
+							<!-- 年齢 -->
+							<div class="form-label-group">
+								<label for="age">年齢</label>
+								<input type="text"
+									id="age"
+									name="age"
+									th:value="*{age}"
+									class="form-control">
+							</div>
+							<!-- メールアドレス -->
+							<div class="form-label-group">
+								<label for="mailAddress">メールアドレス</label>
+								<input type="text"
+									id="mailAddress"
+									name="mailAddress"
+									th:value="*{mailAddress}"
+									class="form-control">
+							</div>
+							<br>
+							<button
+								class="btn btn-lg btn-primary btn-block btn-login font-weight-bold mb-2"
+								type="submit">確認</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,14 +1,19 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.form.LoginForm;
+import com.example.demo.form.UserForm;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -31,11 +36,13 @@ public class SchooController {
 		// ログイン状態のチェック
 		String login = (String)session.getAttribute("login");
 		if ("ok".equals(login)) {
-			return "logout";
+			return "user";
+			//return "input";
 		} else {
 			return "index";
 		}
 	}
+	
 	/**
 	 * ログイン処理
 	 * @param loginForm	ログインForm
@@ -59,6 +66,7 @@ public class SchooController {
 			return "login-ng";
 		}
 	}
+	
 	/**
 	 * ログアウト処理
 	 * @return
@@ -68,4 +76,67 @@ public class SchooController {
 		session.invalidate();
 		return "index";
 	}
+	
+	/**
+	 * 入力処理リクエスト
+	 * @param 	入力メッセージ
+	 * @return 結果画面のパス
+	 */
+	@PostMapping("input")
+	public String input(@RequestParam String message1,
+						@RequestParam String message2,
+						@RequestParam String message3,
+						Model model) {
+		// endが入力されたらリストを作成しない
+		if(!"end".equals(message3)) {
+			model.addAttribute("result", "処理が終了しました");
+			// input画面で入力されたメッセージをリストにセット
+			ArrayList<String> messages = new ArrayList<>();
+			messages.add(message1);
+			messages.add(message2);
+			messages.add(message3);
+			// インラインで表示するメッセージをセット
+			model.addAttribute("messages", messages);
+		}
+
+		return "output";
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@ModelAttribute
+	public UserForm setUpForm() {
+		return new UserForm();
+	}
+	
+	/**
+	 * 入力処理リクエスト
+	 * @param 	userForm ユーザ情報
+	 * @param	bindingResult ユーザ情報の入力チェック結果
+	 * @param 	model 画面に受け渡しをする情報
+	 * @return 入力画面のパス
+	 */
+	@PostMapping("input_userform")
+	public String input_userform(@Validated UserForm userForm,
+						BindingResult bindingResult,
+						Model model) {
+		// 入力チェック結果のメッセージ
+		String message;
+
+		if(bindingResult.hasErrors()) {
+			// 入力に誤りがある場合
+			message = "入力内容に誤りがあります。";
+		} else {
+			// 入力が正しい場合
+			message = "正しく入力できました。";
+		}
+
+		// 入力チェック結果をModelにセット
+		model.addAttribute("message", message);
+
+		return "user";
+	}
+
 }

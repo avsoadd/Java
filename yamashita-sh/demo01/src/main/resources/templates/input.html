@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 今回のサンプルで使用しているCSS（bootstrap）の読み込み -->
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+			integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+			crossorigin="anonymous">
+		<title>input</title>
+	</head>
+	<body>
+		<div class="login align-items-center py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9 col-lg-8 mx-auto">
+						<h3 class="login-heading my-4">メッセージを入力してください</h3>
+						<form action="input" method="post">
+							<!-- メッセージ -->
+							<div class="form-label-group">
+								<label for="message1">メッセージ1</label>
+								<input type="text"
+									id="message1"
+									name="message1"
+									class="form-control">
+							</div>
+							<div class="form-label-group">
+								<label for="message2">メッセージ2</label>
+								<input type="text"
+									id="message2"
+									name="message2"
+									class="form-control">
+							</div>
+							<div class="form-label-group">
+								<label for="message3">メッセージ3</label>
+								<input type="text"
+									id="message3"
+									name="message3"
+									class="form-control">
+							</div>
+							<br>
+							<button
+								class="btn btn-lg btn-primary btn-block btn-login font-weight-bold mb-2"
+								type="submit">送信</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

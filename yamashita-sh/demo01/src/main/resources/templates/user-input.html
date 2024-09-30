@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 今回のサンプルで使用しているCSS（bootstrap）の読み込み -->
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+			integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+			crossorigin="anonymous">
+		<title>user</title>
+	</head>
+	<body>
+		<div class="login align-items-center py-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9 col-lg-8 mx-auto">
+						<h3 class="login-heading my-4">ユーザ情報入力</h3>
+						<p th:text="${message}"></p>
+						<!-- 氏名 -->
+						<ul class="list-group list-group-flush" th:object="${userForm}">
+							<li class="list-group-item">
+								名前：<span th:text="*{name}"></span>
+							</li>
+							<li class="list-group-item">
+								年齢：<span th:text="*{age}"></span>
+							</li>
+							<li class="list-group-item">
+								メールアドレス：<span th:text="*{mailAddress}"></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<a class="btn btn-block" href="/">戻る</a>
+			</div>
+		</div>
+	</body>
+</html>
