@@ -84,7 +84,7 @@ public class Main {
 				count--;
 				
 			} catch(InputMismatchException e) {
-				System.out.println("数字を入力してください");
+				System.out.println("1~9の数字を入力してください");
 				continue;
 			} catch(java.lang.ArrayIndexOutOfBoundsException e) {
 				System.out.println("1~9の数字を入力してください");
@@ -106,39 +106,10 @@ public class Main {
 	}
 	
 	public void exchange_aryBoard(Integer putPlace) {
-		String marubatu = "";
-		
-		if(turn == 1) {
-			marubatu = "◯";
-		} else if(turn == 2) {
-			marubatu = "✕";
-		}
-		
-		if(putPlace >= 1 && putPlace <= 3) {
-			if(putPlace % 3 == 1) {
-				aryBoard[0][0] = marubatu;
-			} else if(putPlace % 3 == 2) {
-				aryBoard[0][1] = marubatu;
-			} else if(putPlace % 3 == 0) {
-				aryBoard[0][2] = marubatu;
-			}
-		} else if(putPlace >= 4 && putPlace <= 6) {
-			if(putPlace % 3 == 1) {
-				aryBoard[1][0] = marubatu;
-			} else if(putPlace % 3 == 2) {
-				aryBoard[1][1] = marubatu;
-			} else if(putPlace % 3 == 0) {
-				aryBoard[1][2] = marubatu;
-			}
-		} else if(putPlace >= 7 && putPlace <= 9) {
-			if(putPlace % 3 == 1) {
-				aryBoard[2][0] = marubatu;
-			} else if(putPlace % 3 == 2) {
-				aryBoard[2][1] = marubatu;
-			} else if(putPlace % 3 == 0) {
-				aryBoard[2][2] = marubatu;
-			}
-		}
+		String marubatu = turn == 1 ? "◯" : "✕";
+		int row = (putPlace - 1) / 3;
+		int col = (putPlace - 1) % 3;
+		aryBoard[row][col] = marubatu;
 	}
 	
 	public Integer Judge() {
