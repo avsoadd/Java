@@ -89,7 +89,21 @@ public class MaruBatsu1 {
 		return inputInt;
 	}
 	
-	
+	// 勝利判定
+	public boolean MaruBatsuResult(MaruBatsu1 mb,String str) {
+		if(mb.board[0] == str && mb.board[1] == str && mb.board[2] == str 
+				|| mb.board[3] == str && mb.board[4] == str && mb.board[5] == str 
+				|| mb.board[6] == str && mb.board[7] == str && mb.board[8] == str 
+				|| mb.board[0] == str && mb.board[3] == str && mb.board[6] == str 
+				|| mb.board[1] == str && mb.board[4] == str && mb.board[7] == str 
+				|| mb.board[2] == str && mb.board[5] == str && mb.board[8] == str 
+				|| mb.board[0] == str && mb.board[4] == str && mb.board[8] == str 
+				|| mb.board[2] == str && mb.board[4] == str && mb.board[6] == str) {
+			return true;
+		}else {
+			return false;			
+		}
+	}
 	
 	// mainメソッド
 	public static void main(String[] args) {
@@ -110,19 +124,11 @@ public class MaruBatsu1 {
 				}				
 			}
 			
-			
-			if(mb.board[0] == "○" && mb.board[1] == "○" && mb.board[2] == "○" 
-					|| mb.board[3] == "○" && mb.board[4] == "○" && mb.board[5] == "○" 
-					|| mb.board[6] == "○" && mb.board[7] == "○" && mb.board[8] == "○" 
-					|| mb.board[0] == "○" && mb.board[3] == "○" && mb.board[6] == "○" 
-					|| mb.board[1] == "○" && mb.board[4] == "○" && mb.board[7] == "○" 
-					|| mb.board[2] == "○" && mb.board[5] == "○" && mb.board[8] == "○" 
-					|| mb.board[0] == "○" && mb.board[4] == "○" && mb.board[8] == "○" 
-					|| mb.board[2] == "○" && mb.board[4] == "○" && mb.board[6] == "○") {
-				System.out.println("Playerの勝ちです。");
+			if(mb.MaruBatsuResult(mb, "○") == true) {
+				System.out.println("Playerの勝ちです。");	
 				break;
 			}
-			
+
 			if(i == 4) {
 				System.out.println("引き分けです。");
 				break;
@@ -139,19 +145,11 @@ public class MaruBatsu1 {
 					System.out.println("選び直します");
 				}	
 			}
-			if(mb.board[0] == "●" && mb.board[1] == "●" && mb.board[2] == "●" 
-					|| mb.board[3] == "●" && mb.board[4] == "●" && mb.board[5] == "●" 
-					|| mb.board[6] == "●" && mb.board[7] == "●" && mb.board[8] == "●" 
-					|| mb.board[0] == "●" && mb.board[3] == "●" && mb.board[6] == "●" 
-					|| mb.board[1] == "●" && mb.board[4] == "●" && mb.board[7] == "●" 
-					|| mb.board[2] == "●" && mb.board[5] == "●" && mb.board[8] == "●" 
-					|| mb.board[0] == "●" && mb.board[4] == "●" && mb.board[8] == "●" 
-					|| mb.board[2] == "●" && mb.board[4] == "●" && mb.board[6] == "●" ) {
-				System.out.println("cpuの勝ちです。");
+
+			if(mb.MaruBatsuResult(mb, "●") == true) {
+				System.out.println("cpuの勝ちです。");		
 				break;
 			}
-
 		}
-		
 	}
 }
