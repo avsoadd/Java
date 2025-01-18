@@ -1,0 +1,30 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        // JFrameを作成
+        JFrame frame = new JFrame("Swing Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300); // ウィンドウサイズを設定する
+
+        // JButtonを作成してJFrameに追加
+        JButton button = new JButton("Click Me");
+        frame.getContentPane().add(button);
+        
+        // JLabelを作成してJFrameに追加
+        JLabel label = new JLabel("Hello, World!");
+        frame.getContentPane().add(label, "South"); // レイアウトの位置を指定する
+        
+        // ActionListenerを使用してボタンがクリックされたときの動作を定義
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                label.setText("Button Clicked!");
+            }
+        });
+
+        // ウィンドウを表示
+        frame.setVisible(true);
+    }
+}
