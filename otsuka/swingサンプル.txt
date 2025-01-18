@@ -1,28 +1,68 @@
-import javax.swing.*;
+package swing;
+
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+
 public class Main {
-    public static void main(String[] args) throws Exception {
-        // JFrameを作成
+    public static void main(String[] args) {
+    	// JFrameを作成
         JFrame frame = new JFrame("Swing Example");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300); // ウィンドウサイズを設定する
 
-        // JButtonを作成してJFrameに追加
-        JButton button = new JButton("Click Me");
-        frame.getContentPane().add(button);
-        
-        // JLabelを作成してJFrameに追加
-        JLabel label = new JLabel("Hello, World!");
-        frame.getContentPane().add(label, "South"); // レイアウトの位置を指定する
-        
-        // ActionListenerを使用してボタンがクリックされたときの動作を定義
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                label.setText("Button Clicked!");
-            }
-        });
+        JPanel yPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0, 0, 0, 0);
+        yPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
+
+        for(int i = 0; i < 8; i++) {
+
+        	// パネルを作成
+            JPanel panel = new JPanel(new GridBagLayout());
+            panel.setBorder(new EmptyBorder(0, 0, 0, 0));
+
+        	for(int j = 0; j < 8; j++)
+        	{
+                // ボタンを作成してパネルに追加
+        		int index = i*8+j;
+        		String text = String.valueOf(index);
+        		if(index < 10)
+        		{
+        			text += "  ";
+        		}
+
+                JButton button = new JButton(text);
+                button.setPreferredSize(new Dimension(100, button.getHeight()));
+                // ActionListenerを使用してボタンがクリックされたときの動作を定義
+                button.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    }
+                });
+                gbc.gridx = j;
+                gbc.gridy = 0;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                panel.add(button, gbc);
+        	}
+        	gbc.gridx = 0;
+        	gbc.gridy = i;
+        	gbc.fill = GridBagConstraints.VERTICAL;
+        	yPanel.add(panel, gbc);
+        }
+
+
+        // パネルをフレームに追加
+        frame.getContentPane().add(yPanel);
+
 
         // ウィンドウを表示
         frame.setVisible(true);
