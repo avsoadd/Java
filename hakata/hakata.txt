@@ -1,0 +1,57 @@
+
+import java.util.Random;
+
+public class Hello {
+	public static void main(String[] args) {
+		String[] hands = {"グー", "チョキ","パー"};
+		Random r = new Random();
+		//ランダムな数字をrに格納
+		
+		int i1 = 0;
+		
+		System.out.println("勝ちたい数分勝負しましょう。数字を入力してください。");
+		int count = new java.util.Scanner(System.in).nextInt();
+		//ユーザーからの入力をcountに格納
+		
+		while(i1 < count) {
+			System.out.println("最初はグー　じゃんけん");
+			String playerHand = "";
+			while (true) {
+				playerHand = new java.util.Scanner(System.in).nextLine();
+				//ユーザーからの入力をplayerHandに格納
+				System.out.println(playerHand);
+				
+				if( playerHand.equals("グー") ||
+					playerHand.equals("パー") ||
+					playerHand.equals("チョキ")	)
+				{
+					break;
+				}
+				else
+				{
+					System.out.println("もう一度入力してください");
+				}
+			}
+			String cpuHand = hands[r.nextInt(3)];
+			//ランダムに選ばれた1～3をcpuhandに格納
+			System.out.println(cpuHand);
+			
+			String ret = "あなたの負け";
+			if((playerHand.equals("グー") && cpuHand.equals("チョキ")) ||
+				(playerHand.equals("チョキ") && cpuHand.equals("パー")) ||
+				playerHand.equals("パー") && cpuHand.equals("グー")) {
+				ret = "あなたの勝ち";
+				i1++;
+			}
+			 else if(playerHand.equals(cpuHand)){
+				ret = "あいこ";
+			}
+			System.out.println(ret);
+		}
+		System.out.println("終了");
+	}
+}
+
+
+
+
